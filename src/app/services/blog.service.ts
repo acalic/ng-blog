@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { map, filter, switchMap } from 'rxjs/operators';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -31,13 +29,5 @@ export class BlogService {
   updateComment(id: number, data: object) {
     return this.http.put(`${this.urlApi}/comments/${id}`, data)
   }
-
-  /* getPostBySlug(slug: string) {
-    return this.http.get(`${this.urlApi}/posts/${slug}`);
-  } */
-
-  /* add(data) {
-    return this.http.post(this.urlApi, data);
-  } */
 
 }

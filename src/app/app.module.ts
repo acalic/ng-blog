@@ -8,20 +8,20 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
-import { NavbarComponent } from './components/navbar/navbar.component';
 import { PostsComponent } from './components/posts/posts.component';
 import { PostComponent } from './components/post/post.component';
 import { FieldErrorDisplayComponent } from './components/field-error-display/field-error-display.component';
 import { CommentFormComponent } from './components/comment-form/comment-form.component';
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent,
     PostsComponent,
     PostComponent,
     FieldErrorDisplayComponent,
-    CommentFormComponent
+    CommentFormComponent,
+    HeaderComponent
   ],
   imports: [
     NgbModule,

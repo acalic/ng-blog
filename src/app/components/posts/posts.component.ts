@@ -15,7 +15,6 @@ export class PostsComponent implements OnInit {
 
   ngOnInit() {
     this.getArticles();
-    //console.log(this.posts$.sort((a, b) => b.publish_date - a.publish_date))
   }
 
   getArticles() {

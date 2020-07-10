@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
 
 import { BlogService } from '@app/services/blog.service';
 
@@ -25,15 +24,14 @@ export class PostComponent implements OnInit {
   commentEditBoxActiveId: number;
 
   constructor(
-    private _blogService: BlogService,
-    private _location: Location,
+    public blogService: BlogService,
     private _route: ActivatedRoute,
   ) {}
 
   ngOnInit() {
     this._route.params.subscribe(params => {
       this.postId$ = params.id;
-      this._blogService.getPostById(params.id).subscribe((res: Post) => {
+      this.blogService.getPostById(params.id).subscribe((res: Post) => {
         this.post$ = res;
       })
       this.getComments();
@@ -41,7 +39,7 @@ export class PostComponent implements OnInit {
   }
 
   getComments() {
-    this._blogService.getCommentsByPostId(this.postId$).subscribe((res: Comment[]) => {
+    this.blogService.getCommentsByPostId(this.postId$).subscribe((res: Comment[]) => {
       this.comments$ = this.listToTree(res);
       this.commentsTotalNum = res.length
     })
@@ -73,10 +71,6 @@ export class PostComponent implements OnInit {
     this.commentEditBoxActiveId = id;
     if (this.commentReplyBoxActiveId) this.commentsTree[this.commentReplyBoxActiveId]['replyBoxCollapsed'] = true; // close reply box
     this.commentsTree[id]['editBoxCollapsed'] = !this.commentsTree[id]['editBoxCollapsed'];
-  }
-
-  backClicked() {
-    this._location.back();
   }
 
   listToTree(arr: Comment[]) {

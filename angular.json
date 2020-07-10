@@ -92,7 +92,16 @@
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
             "assets": ["src/favicon.ico", "src/assets"],
-            "styles": ["src/scss/styles.scss"],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "node_modules/",
+                "src/scss"
+              ]
+            },
+            "styles": [
+              "node_modules/bootstrap/scss/bootstrap.scss",
+              "src/scss/styles.scss"
+            ],
             "scripts": []
           }
         },
