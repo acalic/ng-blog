@@ -1,0 +1,81 @@
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+
+@import 'variables';
+@import 'mixins';
+
+body {
+    font-family: $font-secondary;
+}
+
+h3 {
+    font-size: 25px;
+    color: #000;
+    font-weight: normal;
+    margin-bottom: 23px;
+}
+
+a {
+    color: $color-primary;
+
+    &:hover {
+        color: $color-primary-darker;
+    }
+}
+
+.btn-lg {
+    padding: 13px 20px 12px;
+    font-size: 1rem;
+}
+
+.btn-primary {
+    @include button-variant($color-primary-darker, $color-primary-darker, $white);
+}
+
+.btn-secondary {
+    @include button-variant($color-secondary, $color-secondary, $white);
+}
+
+input.form-control,
+textarea.form-control {
+    border: 1px solid #d5dae2;
+    padding: 15px 25px;
+    min-height: 45px;
+    max-width: 100%;
+    font-weight: normal;
+
+    &:focus {
+        box-shadow: none;
+    }
+
+    &::placeholder {
+        color: #919aa3;
+    }
+}
+
+.text-color-primary {
+    color: $color-primary;
+}
+
+.text-color-primary-darker {
+    color: $color-primary-darker;
+}
+
+.text-color-secondary {
+    color: $color-secondary;
+}
+
+.visually-hidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+
+.fade-in {
+    @include fadein();
+}

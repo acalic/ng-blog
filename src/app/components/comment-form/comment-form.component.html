@@ -1,0 +1,26 @@
+<form [formGroup]="commentForm" (ngSubmit)="submitComment(commentForm.value)" [ngClass]="{'reply': reply,'edit': edit}">
+    <div class="form-group" [ngClass]="displayFieldWarn('commentAuthor')">
+        <label for="commentAuthor" class="visually-hidden">Name</label>
+        <input type="text" placeholder="Name" class="form-control" id="commentAuthor" formControlName="commentAuthor">
+        <app-field-error-display 
+            [displayError]="isFieldValid('commentAuthor')" 
+            errorMsg="This field cannot be empty">
+        </app-field-error-display>
+    </div>
+    <div class="form-group" [ngClass]="displayFieldWarn('commentBody')">
+        <label for="commentBody" class="visually-hidden">Your comment</label>
+        <textarea placeholder='Type your comment here...' type="text" class="form-control" id="commentBody" formControlName="commentBody"></textarea>
+        <app-field-error-display 
+            [displayError]="isFieldValid('commentBody')" 
+            errorMsg="This field cannot be empty">
+        </app-field-error-display>
+    </div>
+    <button
+        type="submit"
+        class="btn btn-primary mr-2"
+        [ngClass]="{'btn-sm': reply || edit}"
+        [disabled]="!commentForm.valid || commentForm.pristine"
+    >
+        Submit
+    </button>
+</form>

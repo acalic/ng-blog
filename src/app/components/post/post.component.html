@@ -1,0 +1,79 @@
+<div *ngIf="post$ as item">
+  <h1 class="mb-3">{{ item.title }}</h1>
+  <p class="post-subtitle text-muted mb-3">
+    <span><i class="fa fa-pencil"></i>By {{ item.author }}</span>
+    <span><i class="fa fa-calendar"></i>{{ item.publish_date }}</span>
+    <span><i class="fa fa-comment"></i>{{ commentsTotalNum }} comments</span>
+  </p>
+  <div class="post-content" [innerHTML]="item.content"></div>
+</div>
+
+<button class="btn btn-outline-secondary mt-3" (click)="backClicked()">
+  Back to all posts
+</button>
+
+<div class="comments-section" *ngIf="commentsTotalNum">
+    <h4 class="mt-5 mb-4">Comments ({{ commentsTotalNum }})</h4>
+    <ul>
+        <ng-template #recursiveList let-list>
+            <li *ngFor="let item of list">
+                <div class="mb-3">
+                    <h5>
+                        <span class="text-color-primary-darker">{{ item.user }}</span>
+                        <small class="text-muted mx-2">&#9679;</small>
+                        <small class="text-muted">{{ item.date }}</small>
+                    </h5>
+                    <p class="mb-1">{{ item.content }}</p>
+                    <a class="btn btn-sm btn-link mr-1" *ngIf="item.children.length > 0" (click)="toggleShowReplies(item.id)">
+                        <small><i class="mr-1 fa" [ngClass]="{'fa-caret-up': item.childrenCollapsed, 'fa-caret-down': !item.childrenCollapsed}"></i></small>Show replies ({{ item.children.length }})
+                    </a>
+                    <button
+                        class="btn btn-sm btn-light mr-1"
+                        (click)="toggleShowReplyBox(item.id)"
+                    >
+                        <small><i class="fa fa-mail-reply mr-1"></i></small>
+                        Reply
+                    </button>
+                    <button
+                        class="btn btn-sm btn-light"
+                        (click)="toggleShowEditComBox(item.id)"
+                    >
+                        <small><i class="fa fa-edit mr-1"></i></small>
+                        Edit
+                    </button>
+                    <div class="mt-3" [ngbCollapse]="item.replyBoxCollapsed">
+                        <app-comment-form
+                            [postId]="postId$"
+                            [parentId]="item.id"
+                            [reply]="true"
+                            (commentsUpdated)="getComments()"
+                        ></app-comment-form>
+                    </div>
+                    <div class="mt-3" [ngbCollapse]="item.editBoxCollapsed">
+                        <app-comment-form
+                            [postId]="postId$"
+                            [parentId]="item.parent_id"
+                            [editCommentId]="item.id"
+                            [edit]="true"
+                            [commentAuthorVal]="item.user"
+                            [commentBodyVal]="item.content"
+                            (commentsUpdated)="getComments()"
+                        ></app-comment-form>
+                    </div>
+                </div>
+                <ul *ngIf="item.children.length > 0" [ngbCollapse]="item.childrenCollapsed">
+                    <ng-container *ngTemplateOutlet="recursiveList; context: { $implicit: item.children }"></ng-container>
+                </ul>
+            </li>
+        </ng-template>
+        <ng-container *ngTemplateOutlet="recursiveList; context: { $implicit: comments$ }"></ng-container>
+    </ul>
+</div>
+
+<div class="comments-form-section pb-5">
+    <h5 class="mt-5 mb-4">Leave a comment</h5>
+    <app-comment-form
+        [postId]="postId$"
+        (commentsUpdated)="getComments()"
+    ></app-comment-form>
+</div>
