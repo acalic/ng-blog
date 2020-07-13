@@ -22,4 +22,17 @@ describe('FieldErrorDisplayComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should redner the error', async(() => {
+    fixture = TestBed.createComponent(FieldErrorDisplayComponent);
+    component = fixture.componentInstance;
+
+    // provide inputs here
+    component.errorMsg = 'This field is invalid';
+    component.displayError = true;
+
+    fixture.detectChanges();
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector('.text-danger').textContent).toContain('This field is invalid');
+ }));
 });

@@ -30,4 +30,11 @@ describe('CommentFormComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should render the submit button', async(() => {
+    const fixture = TestBed.createComponent(CommentFormComponent);
+    fixture.detectChanges();
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector('#btn-submit').textContent).toContain('Submit');
+ }));
 });

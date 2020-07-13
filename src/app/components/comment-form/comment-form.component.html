@@ -18,6 +18,7 @@
     <button
         type="submit"
         class="btn btn-primary mr-2"
+        id="btn-submit"
         [ngClass]="{'btn-sm': reply || edit}"
         [disabled]="!commentForm.valid || commentForm.pristine"
     >
