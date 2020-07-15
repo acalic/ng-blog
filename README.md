@@ -1,5 +1,7 @@
 ![App Banner](src/assets/images/app-banner.png)
 
+## Demo: [https://ng-blog-01.firebaseapp.com/](https://ng-blog-01.firebaseapp.com/)
+
 # Angular Blog
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.4.
@@ -9,7 +11,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 Run `npm i` to install the dependencies
 
 ## API server (IMPORTANT!)
-The mock API server needs to run locally before serving the app:
+The mock API server needs to run locally before serving the app in dev mode
 https://github.com/LetsGetChecked/developer-challenge-api
 
 ## Development server
